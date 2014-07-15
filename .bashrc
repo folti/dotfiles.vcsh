@@ -127,7 +127,16 @@ eval "$(lesspipe)"
 if [ -f $HOME/.bash_it_rc ]; then
 	source $HOME/.bash_it_rc
 fi
-export HISTCONTROL="$HISTCONTROL ignorespace"
+
+case "$HISTCONTROL" in
+    *ignoreboth*);;
+    *)
+        export HISTCONTROL="ignoreboth"
+        ;;
+esac
+
+# MC likes to pollute it's subshell's history
+export HISTIGNORE='cd "\`printf*'
 # turn off X's bell 
 #if [ "$DISPLAY" ]; then
 #	xset b 0
