@@ -1,0 +1,23 @@
+Rxvt*background: black
+Rxvt*foreground: grey70
+
+URxvt*background: black
+URxvt*foreground: grey70
+!urxvt*termName: rxvt
+urxvt*termName: rxvt-unicode-256color
+*fading: 15
+URxvt.urlButton: 3
+URxvt.perl-lib: /home/folti/.urxvt
+URxvt.perl-ext-common: default,tabbed,option-popup,selection,selection-popup,url-select,font-size
+URxvt.urlLauncher: /home/folti/bin/ropera
+URxvt.underlineURLs: true
+URxvt.keysym.M-u: perl:url-select:select_next
+
+Rxvt.font: xft:Bitstream Vera Sans Mono:size=11:autohint=true
+URxvt.font: xft:Bitstream Vera Sans Mono:size=11:autohint=true
+
+!changing font size
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
