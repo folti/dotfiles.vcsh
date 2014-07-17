@@ -21,21 +21,34 @@ fi
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+__set_dircolors() {
+    local _dcfile="$1"
+    if [ -f "$_dcfile" ]; then
+        eval $(dircolors "$_dcfile")
+    fi
+}
+
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ] && [ -n "$TERM" ]; then
-    case "$TERM" in
-        *256colors)
-            eval $(dircolors ~/.dircolors256)
-            ;;
-        dumb);;
-        *)
-            eval $(dircolors ~/.dircolors)
-            ;;
-    esac
+    if [ -x /usr/bin/dircolors ]; then
+        case "$TERM" in
+            *256color)
+                __set_dircolors "$HOME/.dircolors256"
+                ;;
+            dumb);;
+            *)
+                __set_dircolors "$HOME/.dircolors"
+                ;;
+        esac
+    fi
 
     alias ls='ls --color=auto'
     alias dir='ls --color=auto --format=vertical'
     alias vdir='ls --color=auto --format=long'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 
     # If this is an xterm set the title to user@host:dir
     case "$TERM" in
@@ -122,8 +135,24 @@ alias hunkey='setxkbmap -option grp:switch,grp:shifts_toggle,grp_led:scroll us,h
 
 
 
-eval "$(lesspipe)"
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+
+# load bash-it
 if [ -f $HOME/.bash_it_rc ]; then
 	source $HOME/.bash_it_rc
 fi
@@ -131,12 +160,13 @@ fi
 case "$HISTCONTROL" in
     *ignoreboth*);;
     *)
-        export HISTCONTROL="ignoreboth"
+        export HISTCONTROL="$HISTCONTROL:ignoreboth"
         ;;
 esac
 
 # MC likes to pollute it's subshell's history
 export HISTIGNORE='cd "\`printf*'
+
 # turn off X's bell 
 #if [ "$DISPLAY" ]; then
 #	xset b 0
