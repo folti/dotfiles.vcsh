@@ -20,3 +20,9 @@ URxvt.keysym.C-Up:     perl:font-size:increase
 URxvt.keysym.C-Down:   perl:font-size:decrease
 URxvt.keysym.C-S-Up:   perl:font-size:incglobal
 URxvt.keysym.C-S-Down: perl:font-size:decglobal
+
+! man/groff coloration
+! nicked from http://www.cyberciti.biz/faq/linux-unix-colored-man-pages-with-less-command/
+URxvt.colorIT:      #87af5f
+URxvt.colorBD:      #d7d7d7
+URxvt.colorUL:      #87afd7
