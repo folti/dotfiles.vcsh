@@ -167,6 +167,9 @@ esac
 # MC likes to pollute it's subshell's history
 export HISTIGNORE='cd "\`printf*'
 
+if [ -f $HOME/.profabevjava ]; then
+    . $HOME/.profabevjava
+fi
 # turn off X's bell 
 #if [ "$DISPLAY" ]; then
 #	xset b 0
