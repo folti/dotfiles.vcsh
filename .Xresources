@@ -1,15 +1,14 @@
-Rxvt*background: black
-Rxvt*foreground: grey70
+#include ".Xresources.local"
+Rxvt.foreground: grey70
+Rxvt.background: black
 
 URxvt*background: black
 URxvt*foreground: grey70
-!urxvt*termName: rxvt
-urxvt*termName: rxvt-unicode-256color
 *fading: 15
 URxvt.urlButton: 3
-URxvt.perl-lib: /home/folti/.urxvt
+URxvt.perl-lib: HOME/.urxvt
 URxvt.perl-ext-common: default,tabbed,option-popup,selection,selection-popup,url-select,font-size
-URxvt.urlLauncher: /home/folti/bin/ropera
+URxvt.urlLauncher: HOME/bin/ropera
 URxvt.underlineURLs: true
 URxvt.keysym.M-u: perl:url-select:select_next
 
