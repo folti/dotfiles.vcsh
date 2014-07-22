@@ -79,33 +79,33 @@ alias termreset='echo -ne "\017\012";reset'
 
 
 squid(){
-    
-    
-    
-    gconftool --type int --set /system/http_proxy/port 3128
+	
+	
+	
+	gconftool --type int --set /system/http_proxy/port 3128
 }
 
 privoxy() {
-    export http_proxy=http://localhost:8118
-    
-    gconftool --type string --set /system/http_proxy/host "localhost"
-    gconftool --type int --set /system/http_proxy/port 8118
+	export http_proxy=http://localhost:8118
+	
+	gconftool --type string --set /system/http_proxy/host "localhost"
+	gconftool --type int --set /system/http_proxy/port 8118
 }
 
 export squid privoxy 
 
 listdlls() {
-    while [ -n "$1" ]; do
-        if [ -f "$1" ];then
-            echo "$1:"
-            objdump -x "$1" | sed -n -e 's/.*DLL Name: /  /p'
-        fi
-        shift
-    done
+	while [ -n "$1" ]; do
+		if [ -f "$1" ];then
+			echo "$1:"
+			objdump -x "$1" | sed -n -e 's/.*DLL Name: /  /p'
+		fi
+		shift
+	done
 }
 
 gensnapshot () {
-    date "+%Y%m%d+%H%M"
+	date "+%Y%m%d+%H%M"
 }
 
 #export win bbug heirloom heirman gensnapshot listdlls
@@ -154,7 +154,7 @@ fi
 
 # load bash-it
 if [ -f $HOME/.bash_it_rc ]; then
-    source $HOME/.bash_it_rc
+	source $HOME/.bash_it_rc
 fi
 
 case "$HISTCONTROL" in
@@ -167,12 +167,9 @@ esac
 # MC likes to pollute it's subshell's history
 export HISTIGNORE='cd "\`printf*'
 
-if [ -f $HOME/.profabevjava ]; then
-    . $HOME/.profabevjava
-fi
 # turn off X's bell 
 #if [ "$DISPLAY" ]; then
-#   xset b 0
+#	xset b 0
 #fi
 
 #alias nobell='echo -ne "\x1b[11;0]"'
@@ -196,11 +193,11 @@ fi
 
 
 #leftmouse() {
-#   gconftool --type bool --set /desktop/gnome/peripherals/mouse/left_handed true
+#	gconftool --type bool --set /desktop/gnome/peripherals/mouse/left_handed true
 #}
 #
 #rightmouse() {
-#   gconftool --type bool --set /desktop/gnome/peripherals/mouse/left_handed false
+#	gconftool --type bool --set /desktop/gnome/peripherals/mouse/left_handed false
 #}
 #leftmouse rightmouse
 
@@ -208,12 +205,12 @@ fi
 #alias tla_distclean='if [ -d debian ] && [ -d "{arch}" ] ;then rm -rf \{arch\} && find . -type d -name .arch-ids -print0 | xargs -0 rm -rf;fi'
 
 #tla_rendir() {
-#   if [ -n "$1" ] && [ -f "$1/debian/changelog" ];then 
-#       f=`head -1 "$1/debian/changelog" | sed -e "s/.*(//" -e "s/).*//"`
-#       pkgname=`echo "$1" | sed -e 's/\-\-.*//'`
-#       new=$pkgname"_"$f
-#       mv "$1" "$new"
-#   fi
+#	if [ -n "$1" ] && [ -f "$1/debian/changelog" ];then 
+#		f=`head -1 "$1/debian/changelog" | sed -e "s/.*(//" -e "s/).*//"`
+#		pkgname=`echo "$1" | sed -e 's/\-\-.*//'`
+#		new=$pkgname"_"$f
+#		mv "$1" "$new"
+#	fi
 #}
 #export tla_rendir
 
@@ -225,24 +222,24 @@ fi
 
 
 
-#   while [ -n "$1" ]; do 
-#       ropera "http://***REMOVED***//***REMOVED***/show_bug.cgi?id=$1";
-#       shift;
-#   done;
+
+
+
+
 #}
 
 #win() {
-#   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/wine/lib
-#   export PATH=$PATH:/usr/local/wine/bin
+#	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/wine/lib
+#	export PATH=$PATH:/usr/local/wine/bin
 #}
 
 #heirloom () {
-#   export PATH=/usr/5bin:/usr/ccs/bin:$PATH
-#   export MANPATH=/usr/share/man/5man/:usr/ccs/share/man:$MANPATH
+#	export PATH=/usr/5bin:/usr/ccs/bin:$PATH
+#	export MANPATH=/usr/share/man/5man/:usr/ccs/share/man:$MANPATH
 #}
 
 #heirman () {
-#   export MANPATH=/usr/share/man/5man/:usr/ccs/share/man:$MANPATH
+#	export MANPATH=/usr/share/man/5man/:usr/ccs/share/man:$MANPATH
 #}
 
 
