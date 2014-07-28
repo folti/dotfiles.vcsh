@@ -75,25 +75,6 @@ PS1='$? ${debian_chroot:+($debian_chroot)}\[\033[00;32m\]\u@\h\[\033[00m\]:\[\03
 
 alias termreset='echo -ne "\017\012";reset'
 
-
-
-
-squid(){
-	
-	
-	
-	gconftool --type int --set /system/http_proxy/port 3128
-}
-
-privoxy() {
-	export http_proxy=http://localhost:8118
-	
-	gconftool --type string --set /system/http_proxy/host "localhost"
-	gconftool --type int --set /system/http_proxy/port 8118
-}
-
-export squid privoxy 
-
 listdlls() {
 	while [ -n "$1" ]; do
 		if [ -f "$1" ];then
@@ -167,6 +148,25 @@ esac
 # MC likes to pollute it's subshell's history
 export HISTIGNORE='cd "\`printf*'
 
+#
+#
+#
+#squid(){
+#	
+#	
+#	
+#	gconftool --type int --set /system/http_proxy/port 3128
+#}
+#
+#privoxy() {
+#	export http_proxy=http://localhost:8118
+#	
+#	gconftool --type string --set /system/http_proxy/host "localhost"
+#	gconftool --type int --set /system/http_proxy/port 8118
+#}
+#
+#export squid privoxy 
+#
 # turn off X's bell 
 #if [ "$DISPLAY" ]; then
 #	xset b 0
