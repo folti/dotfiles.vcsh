@@ -132,6 +132,9 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f $HOME/.LESS_TERMCAP ]; then
+    source $HOME/.LESS_TERMCAP
+fi
 
 # load bash-it
 if [ -f $HOME/.bash_it_rc ]; then
