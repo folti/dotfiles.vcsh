@@ -76,17 +76,17 @@ PS1='$? ${debian_chroot:+($debian_chroot)}\[\033[00;32m\]\u@\h\[\033[00m\]:\[\03
 alias termreset='echo -ne "\017\012";reset'
 
 listdlls() {
-	while [ -n "$1" ]; do
-		if [ -f "$1" ];then
-			echo "$1:"
-			objdump -x "$1" | sed -n -e 's/.*DLL Name: /  /p'
-		fi
-		shift
-	done
+    while [ -n "$1" ]; do
+        if [ -f "$1" ];then
+            echo "$1:"
+            objdump -x "$1" | sed -n -e 's/.*DLL Name: /  /p'
+        fi
+        shift
+    done
 }
 
 gensnapshot () {
-	date "+%Y%m%d+%H%M"
+    date "+%Y%m%d+%H%M"
 }
 
 #export win bbug heirloom heirman gensnapshot listdlls
@@ -138,7 +138,7 @@ fi
 
 # load bash-it
 if [ -f $HOME/.bash_it_rc ]; then
-	source $HOME/.bash_it_rc
+    source $HOME/.bash_it_rc
 fi
 
 case "$HISTCONTROL" in
@@ -151,3 +151,4 @@ esac
 # MC likes to pollute it's subshell's history
 export HISTIGNORE='cd "\`printf*'
 
+# vim: expandtab
