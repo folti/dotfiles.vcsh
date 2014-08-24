@@ -2,6 +2,10 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+if [ -f ~/.bash_env ]; then
+    . ~/.bash_env
+fi
+
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
     PATH=~/bin:"${PATH}"
