@@ -31,12 +31,11 @@ __set_dircolors() {
         eval $(dircolors "$_dcfile")
     fi
 }
-
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ] && [ -n "$TERM" ]; then
     if [ -x /usr/bin/dircolors ]; then
         case "$TERM" in
-            *256color)
+            *256color|*256color-*)
                 __set_dircolors "$HOME/.dircolors256"
                 ;;
             dumb);;
@@ -92,6 +91,19 @@ listdlls() {
 gensnapshot () {
     date "+%Y%m%d+%H%M"
 }
+
+__screen=`which screen`
+if [ -n "$__screen" ]; then
+    SCREEN_TERM=""
+    case "$TERM" in
+        *-256color*|*256color-*)
+            SCREEN_TERM="-T screen-256color"
+            ;;
+    esac
+
+    alias screen="$__screen $SCREEN_TERM"
+fi
+unset __screen
 
 #export win bbug heirloom heirman gensnapshot listdlls
 export gensnapshot listdlls
