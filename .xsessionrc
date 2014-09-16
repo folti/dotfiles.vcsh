@@ -1,0 +1,4 @@
+# set vars
+if [ -f "$HOME/.profile_env" ]; then
+	. "$HOME/.profile_env"
+fi

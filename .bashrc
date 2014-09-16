@@ -2,6 +2,10 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+if [ -f "$HOME/.profile_env" ]; then
+    . "$HOME/.profile_env"
+fi
+
 if [ -f ~/.bash_env ]; then
     . ~/.bash_env
 fi
