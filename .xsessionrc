@@ -1,4 +1,13 @@
 # set vars
 if [ -f "$HOME/.profile_env" ]; then
-	. "$HOME/.profile_env"
+    . "$HOME/.profile_env"
 fi
+
+fc-cache -fv $HOME/.fonts
+mkfontdir $HOME/.fonts
+(cd $HOME && xrdb -merge $HOME/.Xresources)
+xset +fp $HOME/.fonts
+xhost inet:hapci
+setxkbmap -option "grp:shift_toggle,grp_led:scroll" us,hu basic,querty
+
+# vim: ft=sh expandtab
