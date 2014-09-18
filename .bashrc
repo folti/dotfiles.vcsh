@@ -171,11 +171,6 @@ unset __screen
 #export win bbug heirloom heirman gensnapshot listdlls
 export gensnapshot listdlls
 
-
-
-
-
-
 # very long bash history
 HISTSIZE=4000
 HISTFILESIZE=4000
@@ -191,9 +186,6 @@ alias hgrep='history | grep '
 
 alias gmutt='mutt -F ~/.muttrc-gmail'
 alias hunkey='setxkbmap -option grp:switch,grp:shifts_toggle,grp_led:scroll us,hu basic,qwerty'
-
-
-
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
