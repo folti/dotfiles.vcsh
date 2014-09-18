@@ -171,14 +171,6 @@ unset __screen
 #export win bbug heirloom heirman gensnapshot listdlls
 export gensnapshot listdlls
 
-# very long bash history
-HISTSIZE=4000
-HISTFILESIZE=4000
-export HISTSIZE HISTFILESIZE
-# allow varoius bash instances to append their history to the histfile.
-shopt -s histappend
-# don't put duplicate lines in the history. See bash(1) for more options
-#export HISTCONTROL=ignoredups
 
 alias xtitle='echo -ne "\033]0;$1\007"'
 alias hsearch='history | grep '
@@ -212,6 +204,14 @@ if [ -f $HOME/.bash_it_rc ]; then
     source $HOME/.bash_it_rc
 fi
 
+# very long bash history
+HISTSIZE=10000
+HISTFILESIZE=10000
+export HISTSIZE HISTFILESIZE
+# allow varoius bash instances to append their history to the histfile.
+shopt -s histappend
+# don't put duplicate lines in the history. See bash(1) for more options
+#export HISTCONTROL=ignoredups
 case "$HISTCONTROL" in
     *ignoreboth*);;
     *)
@@ -220,6 +220,6 @@ case "$HISTCONTROL" in
 esac
 
 # MC likes to pollute it's subshell's history
-export HISTIGNORE='cd "\`printf*'
+export HISTIGNORE='&:exit:clear:ls:mc:cd "\`printf*'
 
 # vim: expandtab
