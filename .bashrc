@@ -10,6 +10,62 @@ if [ -f ~/.bash_env ]; then
     . ~/.bash_env
 fi
 
+__terminfocheck() {
+    local _fch=$(echo "$1" | head -c 1)
+
+    for _d in /usr/share/terminfo/ /usr/lib/terminfo/; do
+        if [ -f "$_d/$_fch/$1" ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+__set_term() {
+    local _nuterm=$1
+    if [ -n "$_nuterm" ] && __terminfocheck "$_nuterm"; then
+        TERM=$_nuterm
+        unset $_nuterm
+    fi
+}
+
+if [ "$TERM" != "dumb" ] && [ -n "$TERM" ]; then
+    # check if we have the rxvt-unicode-* terminfos
+    case "$TERM" in
+        *-unicode-*)
+            if ! __terminfocheck "$TERM"; then
+                local _nuterm=$(echo $TERM | sed -e 's/-unicode//')
+            fi
+            __set_term "$_nuterm"
+        ;;
+    esac
+
+    __TERM_COLORS=$(tput colors || 8)
+    case "$TERM" in
+        *-256color*)
+            if ! __terminfocheck "$TERM" || [ 256 -gt $__TERM_COLORS ]; then
+                local _nuterm=${TERM%%-256color*}
+            fi
+            ;;
+        *-88color*)
+            __terminfo_color=88
+            if ! __terminfocheck "$TERM" || [ 88 -gt $__TERM_COLORS ]; then
+                local _nuterm=${TERM%%-88color*}
+            fi
+            ;;
+    esac
+    __set_term "$_nuterm"
+
+    for _t in $TERM xterm vt100; do
+        if __terminfocheck "$_t"; then
+            TERM=$_t
+            export TERM
+            break
+        fi
+    done
+    unset _t
+fi
+
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
     PATH=~/bin:"${PATH}"
@@ -59,8 +115,11 @@ if [ "$TERM" != "dumb" ] && [ -n "$TERM" ]; then
 
     # If this is an xterm set the title to user@host:dir
     case "$TERM" in
-    xterm*|rxvt*|screen*)
+    xterm*|rxvt*|Eterm|aterm|kterm|gnome)
         PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+        ;;
+    screen*)
+        PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\033\\"'
         ;;
     *)
         ;;
