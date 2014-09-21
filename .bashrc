@@ -25,7 +25,7 @@ __set_term() {
     local _nuterm=$1
     if [ -n "$_nuterm" ] && __terminfocheck "$_nuterm"; then
         TERM=$_nuterm
-        unset $_nuterm
+        unset _nuterm
     fi
 }
 
@@ -34,9 +34,10 @@ if [ "$TERM" != "dumb" ] && [ -n "$TERM" ]; then
     case "$TERM" in
         *-unicode-*)
             if ! __terminfocheck "$TERM"; then
-                local _nuterm=$(echo $TERM | sed -e 's/-unicode//')
+                _nuterm=$(echo $TERM | sed -e 's/-unicode//')
+                __set_term "$_nuterm"
+                unset _nuterm
             fi
-            __set_term "$_nuterm"
         ;;
     esac
 
@@ -44,17 +45,18 @@ if [ "$TERM" != "dumb" ] && [ -n "$TERM" ]; then
     case "$TERM" in
         *-256color*)
             if ! __terminfocheck "$TERM" || [ 256 -gt $__TERM_COLORS ]; then
-                local _nuterm=${TERM%%-256color*}
+                _nuterm=${TERM%%-256color*}
             fi
             ;;
         *-88color*)
             __terminfo_color=88
             if ! __terminfocheck "$TERM" || [ 88 -gt $__TERM_COLORS ]; then
-                local _nuterm=${TERM%%-88color*}
+                _nuterm=${TERM%%-88color*}
             fi
             ;;
     esac
     __set_term "$_nuterm"
+    unset _nuterm
 
     for _t in $TERM xterm vt100; do
         if __terminfocheck "$_t"; then
