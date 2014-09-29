@@ -13,7 +13,7 @@ fi
 __terminfocheck() {
     local _fch=$(echo "$1" | head -c 1)
 
-    for _d in /usr/share/terminfo/ /usr/lib/terminfo/; do
+    for _d in /usr/share/terminfo/ /lib/terminfo/; do
         if [ -f "$_d/$_fch/$1" ]; then
             return 0
         fi
