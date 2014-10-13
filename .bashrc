@@ -206,6 +206,20 @@ if [ -f $HOME/.bash_it_rc ]; then
     source $HOME/.bash_it_rc
 fi
 
+function git_clean_untracked () {
+    ofs=$IFS
+    IFS='
+'
+    for obj in `git status --porcelain | grep '^??'| cut -f2- -d' '`; do
+        if [ -d "$obj" ]; then
+            rm -rf "$obj"
+        else
+            rm -f "$obj"
+        fi
+    done
+    IFS=$ofs
+}
+
 # very long bash history
 HISTSIZE=10000
 HISTFILESIZE=10000
@@ -223,5 +237,13 @@ esac
 
 # MC likes to pollute it's subshell's history
 export HISTIGNORE='&:exit:clear:ls:mc:cd "\`printf*'
+
+if [ -f "$HOME/.keychain/${HOSTNAME}-sh" ]; then
+    . "$HOME/.keychain/${HOSTNAME}-sh"
+fi
+
+if [ -f "$HOME/.keychain/${HOSTNAME}-sh-gpg" ]; then
+    . "$HOME/.keychain/${HOSTNAME}-sh-gpg"
+fi
 
 # vim: expandtab
