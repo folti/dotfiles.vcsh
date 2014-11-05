@@ -235,6 +235,9 @@ case "$HISTCONTROL" in
         ;;
 esac
 
+#cuz we are lazy
+shopt -s autocd
+
 # MC likes to pollute it's subshell's history
 export HISTIGNORE='&:exit:clear:ls:mc:cd "\`printf*'
 
