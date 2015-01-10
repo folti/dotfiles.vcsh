@@ -30,7 +30,21 @@ __set_term() {
 }
 
 if [ "$TERM" != "dumb" ] && [ -n "$TERM" ]; then
-    # check if we have the rxvt-unicode-* terminfos
+    # ripped from here: http://fedoraproject.org/wiki/Features/256_Color_Terminals#Scope
+    # try to detect the terminal emulators that support 256 colors, but don't
+    # tell it in their TERM.
+    local256="$COLORTERM$XTERM_VERSION$ROXTERM_ID$KONSOLE_DBUS_SESSION"
+    if [ -n "$local256" ]; then
+        case "$TERM" in
+            'xterm') TERM=xterm-256color;;
+            'screen') TERM=screen-256color;;
+            'Eterm') TERM=Eterm-256color;;
+        esac
+        export TERM
+    fi
+    unset local256
+
+    # check if we have the *-unicode-* terminfos
     case "$TERM" in
         *-unicode-*)
             if ! __terminfocheck "$TERM"; then
@@ -65,6 +79,17 @@ if [ "$TERM" != "dumb" ] && [ -n "$TERM" ]; then
             break
         fi
     done
+
+    # ripped from here: http://fedoraproject.org/wiki/Features/256_Color_Terminals#Scope
+    # force 256 colors under screen.
+    if [ -n "$TERMCAP" ]; then
+        case "$TERM" in
+            screen-256color*)
+                TERMCAP=$(echo "$TERMCAP" | sed -e 's/Co#8/Co#256/g')
+                export TERMCAP
+                ;;
+        esac
+    fi
     unset _t
 fi
 
