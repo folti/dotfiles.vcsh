@@ -10,4 +10,10 @@ xset +fp $HOME/.fonts
 xhost inet:hapci
 setxkbmap -option "grp:shift_toggle,grp_led:scroll" us,hu basic,querty
 
+case `hostname` in
+    foltpad*)
+        synclient MaxTapTime=0
+        ;;
+esac
+
 # vim: ft=sh expandtab
