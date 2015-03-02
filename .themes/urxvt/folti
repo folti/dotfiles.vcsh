@@ -1,0 +1,39 @@
+! folti color scheme
+
+*background: black
+*foreground: grey70
+*colorIT:      #87af5f
+*colorBD:      #d7d7d7
+*colorUL:      #87afd7
+
+! black
+*color0: #000000
+*color8: #404040
+
+! red
+*color1: #cd0000
+*color9: #ff0000
+
+! green
+*color2: #00cd00
+*color10: #00ff00
+
+! yellow
+*color3: #cdcd00
+*color11: #ffff00
+
+! blue
+*color4: #0000cd
+*color12: #0000ff
+
+! magenta
+*color5: #cd00cd
+*color13: #ff00ff
+
+! cyan
+*color6: #00cdcd
+*color14: #00ffff
+
+! white
+*color7: #faebd7
+*color15: #ffffff
