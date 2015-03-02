@@ -7,7 +7,7 @@ URxvt*foreground: grey70
 *fading: 15
 URxvt.urlButton: 3
 URxvt.perl-lib: HOME/.urxvt
-URxvt.perl-ext-common: default,tabbed,option-popup,selection,selection-popup,url-select,font-size
+URxvt.perl-ext-common: default,tabbedex,option-popup,selection,selection-popup,url-select,font-size,confirm-paste
 URxvt.urlLauncher: HOME/bin/ropera
 URxvt.underlineURLs: true
 URxvt.keysym.M-u: perl:url-select:select_next
