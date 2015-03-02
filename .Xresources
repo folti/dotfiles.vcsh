@@ -7,13 +7,13 @@ URxvt*foreground: grey70
 *fading: 15
 URxvt.urlButton: 3
 URxvt.perl-lib: HOME/.urxvt
-URxvt.perl-ext-common: default,tabbedex,option-popup,selection,selection-popup,url-select,font-size,confirm-paste,color-select
+URxvt.perl-ext-common: default,tabbedex,option-popup,selection,selection-popup,url-select,font-size,confirm-paste,color-themes
 URxvt.urlLauncher: HOME/bin/ropera
 URxvt.underlineURLs: true
 URxvt.keysym.M-u: perl:url-select:select_next
 
-URxvt.color-themes.themedir:  ~/.themes/urxvt
-URxvt.color-themes.state-file: ~/.urxvt-theme
+URxvt.color-themes.themedir:  HOME/.themes/urxvt
+URxvt.color-themes.state-file: HOME/.urxvt-theme
 URxvt.color-themes.preprocessor: /usr/bin/cpp
 URxvt.keysym.M-C-n:  perl:color-themes:next
 URxvt.keysym.M-C-p:  perl:colorolor-themes:prev
