@@ -178,6 +178,9 @@ sub refresh {
       @$rend[0 .. 5] = ($self->{rs_tab}) x 6;
       push @ofs, [0, 6, -1 ];
       $ofs = 7;
+   } else {
+      substr $text, 0, 1, "|";
+      $ofs = 1;
    }
 
    # Limit the length of tab names.
