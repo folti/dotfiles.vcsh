@@ -6,7 +6,7 @@ URxvt*background: black
 URxvt*foreground: grey70
 *fading: 15
 URxvt.perl-lib: HOME/.urxvt
-URxvt.perl-ext-common: default,tabbedex,option-popup,selection,selection-popup,url-select,font-size,confirm-paste,color-themes,vtwheel,overlay-osc,clipboard
+URxvt.perl-ext-common: default,tabbedex,option-popup,selection,selection-popup,url-select,font-size,confirm-paste,color-themes,vtwheel,overlay-osc,clipboard,keyboard-select
 URxvt.url-select:button: 3
 URxvt.url-select.launcher: HOME/bin/ropera
 URxvt.url-select.underline: true
@@ -23,6 +23,9 @@ URxvt.keysym.M-C-s:  perl:colorr-themes:save-state
 URxvt.keysym.M-c:   perl:clipboard:copy
 URxvt.keysym.M-v:   perl:clipboard:paste
 URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
 
 Rxvt.font: xft:Bitstream Vera Sans Mono:size=11:autohint=true
 URxvt.font: xft:Bitstream Vera Sans Mono:size=11:autohint=true
