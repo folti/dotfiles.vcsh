@@ -16,3 +16,4 @@ defscrollback 10000
 defmonitor on
 activity ""
 
+caption always "%{-b ..}%-w%{+b ..}[[%n%f*%t]]%{-}%+w"
