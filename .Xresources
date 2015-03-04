@@ -30,8 +30,12 @@ URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 
-URxvt.font: xft:Bitstream Vera Sans Mono:size=11:autohint=true:antialias=true
-URxvt.boldFont: xft:Bitstream Vera Sans Mono:bold:size=11:autohint=true:antialias=true
+!URxvt.font: xft:Bitstream Vera Sans Mono:size=11:autohint=true:antialias=true
+!URxvt.boldFont: xft:Bitstream Vera Sans Mono:bold:size=11:autohint=true:antialias=true
+URxvt*font: xft:terminus:pixelsize:12:autohint=true
+URxvt*boldFont: xft:terminus:bold:pixelsize:12:autohint=true
+URxvt*italicFont: xft:Bitstream Vera Sans Mono:italic:autohint=true:pixelsize=12
+URxvt*boldItalicFont: xft:Bitstream Vera Sans Mono:bold:italic:autohint=true:pixelsize=12
 
 !changing font size
 URxvt.keysym.C-Up:     perl:font-size:increase
