@@ -29,8 +29,8 @@ URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 
-Rxvt.font: xft:Bitstream Vera Sans Mono:size=11:autohint=true
-URxvt.font: xft:Bitstream Vera Sans Mono:size=11:autohint=true
+URxvt.font: xft:Bitstream Vera Sans Mono:size=11:autohint=true:antialias=true
+URxvt.boldFont: xft:Bitstream Vera Sans Mono:bold:size=11:autohint=true:antialias=true
 
 !changing font size
 URxvt.keysym.C-Up:     perl:font-size:increase
