@@ -16,4 +16,6 @@ defscrollback 10000
 defmonitor on
 activity ""
 
-hardstatus alwayslastline "%{-b ..}%-w%{+b ..}[[%n%f*%t]]%{-}%+w"
+#hardstatus alwayslastline "%{-b ..}%-w%{+b ..}[[%n%f*%t]]%{-}%+w"
+#
+hardstatus alwayslastline '%{= G}[ %{G}%H %{g}][%= %{= w}%?%-Lw%?%{= R}%n*%f %t%?%{= R}(%u)%?%{= w}%+Lw%?%= %{= g}][ %{y}Load: %l %{g}][%{c}%Y-%m-%d %{W}%c %{g}]'
