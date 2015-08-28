@@ -233,6 +233,7 @@ fi
 # load bash-it
 if [ -f $HOME/.bash_it_rc ]; then
     source $HOME/.bash_it_rc
+    unset pass
 fi
 
 function git_clean_untracked () {
