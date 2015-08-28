@@ -11,22 +11,26 @@ if [ -f ~/.bash_env ]; then
 fi
 
 __terminfocheck() {
-    local _fch=$(echo "$1" | head -c 1)
+    _fch=$(echo "$1" | head -c 1)
 
     for _d in $HOME/.terminfo /usr/share/terminfo/ /lib/terminfo/; do
         if [ -f "$_d/$_fch/$1" ]; then
+            unset _fch
             return 0
         fi
     done
+    unset _fch
     return 1
 }
 
 __set_term() {
-    local _nuterm=$1
+     _nuterm=$1
     if [ -n "$_nuterm" ] && __terminfocheck "$_nuterm"; then
         TERM=$_nuterm
+        export TERM
         unset _nuterm
     fi
+    unset _nuterm
 }
 
 if [ "$TERM" != "dumb" ] && [ -n "$TERM" ]; then
@@ -55,7 +59,7 @@ if [ "$TERM" != "dumb" ] && [ -n "$TERM" ]; then
         ;;
     esac
 
-    __TERM_COLORS=$(tput colors || 8)
+    __TERM_COLORS=$(tput colors 2>/dev/null|| echo 8)
     case "$TERM" in
         *-256color*)
             if ! __terminfocheck "$TERM" || [ 256 -gt $__TERM_COLORS ]; then
