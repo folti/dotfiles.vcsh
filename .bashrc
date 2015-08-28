@@ -186,7 +186,7 @@ gensnapshot () {
     date "+%Y%m%d+%H%M"
 }
 
-__screen=`which screen`
+__screen=`which screen 2>/dev/null`
 if [ -n "$__screen" ]; then
     SCREEN_TERM=""
     case "$TERM" in
