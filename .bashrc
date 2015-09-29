@@ -168,7 +168,11 @@ if [ -z "$debian_chroot" -a -r /etc/debian_chroot ]; then
 fi
 
 # Comment in the above and uncomment this below for a color prompt
-PS1='$? ${debian_chroot:+($debian_chroot)}\[\033[00;32m\]\u\033[00m\]@\[\033[00;33m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+if [ "$USER" = "root" ] || [ "$UID" = "0" ] || [ "$(id -u)" = "0" ]; then
+    PS1='$? ${debian_chroot:+($debian_chroot)}\[\033[0;1;37;41m\]\u\[\033[0;37;41m\]@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='$? ${debian_chroot:+($debian_chroot)}\[\033[00;32m\]\u\033[00m\]@\[\033[00;33m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+fi
 
 alias termreset='echo -ne "\017\012";reset'
 
