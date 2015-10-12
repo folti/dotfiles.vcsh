@@ -294,4 +294,8 @@ if [ -f "$HOME/.keychain/${HOSTNAME}-sh-gpg" ]; then
     . "$HOME/.keychain/${HOSTNAME}-sh-gpg"
 fi
 
+export SSH_SOCKS_PORT=${SSH_SOCKS_PORT:-9999}
+alias ncssh='ssh -o ProxyCommand="nc -X 5 -x localhost:$SSH_SOCKS_PORT %h %p"'
+alias ncscp='scp -o ProxyCommand="nc -X 5 -x localhost:$SSH_SOCKS_PORT %h %p"'
+alias ncsftp='sftp -o ProxyCommand="nc -X 5 -x localhost:$SSH_SOCKS_PORT %h %p"'
 # vim: expandtab
