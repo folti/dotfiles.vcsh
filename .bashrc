@@ -2,6 +2,9 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+
+hosttype=$(uname -s | tr '[A-Z]' '[a-z]')
+
 if [ -f "$HOME/.profile_env" ]; then
     . "$HOME/.profile_env"
 fi
@@ -136,13 +139,17 @@ if [ "$TERM" != "dumb" ] && [ -n "$TERM" ]; then
         esac
     fi
 
-    alias ls='ls --color=auto'
-    alias dir='ls --color=auto --format=vertical'
-    alias vdir='ls --color=auto --format=long'
+    case "$hosttype" in
+        linux)
+            alias ls='ls --color=auto'
+            alias dir='ls --color=auto --format=vertical'
+            alias vdir='ls --color=auto --format=long'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+            alias grep='grep --color=auto'
+            alias fgrep='fgrep --color=auto'
+            alias egrep='egrep --color=auto'
+            ;;
+    esac
 
     # If this is an xterm set the title to user@host:dir
     case "$TERM" in
@@ -157,10 +164,14 @@ if [ "$TERM" != "dumb" ] && [ -n "$TERM" ]; then
     esac
 fi
 
-# some more ls aliases
-alias ll='ls -l'
-alias la='ls -A'
-alias l='ls -CF'
+case "$hosttype" in
+    linux)
+        # some more ls aliases
+        alias ll='ls -l'
+        alias la='ls -A'
+        alias l='ls -CF'
+        ;;
+esac
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "$debian_chroot" -a -r /etc/debian_chroot ]; then
