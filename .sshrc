@@ -24,6 +24,18 @@ if [ -f "$_screenrc" ]; then
 fi
 unset _screenrc
 
-# this is teh last one
+# install SSH pubkeys, if we have some with us.
+SSHDIR=$HOME/.ssh
+AK=$SSHDIR/authorized_keys
+[ ! -d $SSHDIR ] && mkdir -p $SSHDIR
+chmod 700 $SSHDIR
+touch $AK
+chmod 600 $AK
+for pubkey in $_sshrcd/id_*.pub; do
+    if ! grep -q -f $pubkey $AK; then
+        cat $pubkey >> $AK
+    fi
+done
+
 unset _sshrcd
 # vim: ft=sh et ts=4 sw=4
