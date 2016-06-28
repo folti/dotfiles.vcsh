@@ -9,36 +9,46 @@
 # Path to the bash it configuration
 export BASH_IT=$HOME/.bash_it
 
-# Lock and Load a custom theme file
-# location /.bash_it/themes/
-export BASH_IT_THEME='pure-folti'
+_bash_it_setup() {
+    # Lock and Load a custom theme file
+    # location /.bash_it/themes/
+    export BASH_IT_THEME='pure-folti'
 
-# Your place for hosting Git repos. I use this for private repos.
-#export GIT_HOSTING='git@git.domain.com'
+    # Your place for hosting Git repos. I use this for private repos.
+    #export GIT_HOSTING='git@git.domain.com'
 
-# Set my editor and git editor
-export EDITOR="vim"
-export GIT_EDITOR='vim'
+    # Set my editor and git editor
+    export EDITOR="vim"
+    export GIT_EDITOR='vim'
 
-# Set the path nginx
-#export NGINX_PATH='/opt/nginx'
+    # Set the path nginx
+    #export NGINX_PATH='/opt/nginx'
 
-# Don't check mail when opening terminal.
-unset MAILCHECK
+    # Don't check mail when opening terminal.
+    unset MAILCHECK
 
 
-# Change this to your console based IRC client of choice.
+    # Change this to your console based IRC client of choice.
 
-export IRC_CLIENT='irssi'
+    export IRC_CLIENT='irssi'
 
-# Set this to the command you use for todo.txt-cli
+    # Set this to the command you use for todo.txt-cli
 
-export TODO="t"
+    export TODO="t"
 
-# Set vcprompt executable path for scm advance info in prompt (demula theme)
-# https://github.com/xvzf/vcprompt
-#export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
+    # Set vcprompt executable path for scm advance info in prompt (demula theme)
+    # https://github.com/xvzf/vcprompt
+    #export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
 
-export BASH_IT_X_BROWSER="chromium-browser"
-# Load Bash It
-source $BASH_IT/bash_it.sh
+    export BASH_IT_X_BROWSER="chromium-browser"
+    # Load Bash It
+    source $BASH_IT/bash_it.sh
+}
+
+if [ -f $BASH_IT/bash_it.sh ]; then
+    _bash_it_setup
+else
+    unset BASH_IT
+fi
+unset _bash_it_setup
+
