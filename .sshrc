@@ -37,5 +37,10 @@ for pubkey in $_sshrcd/id_*.pub; do
     fi
 done
 
+if [ -e "$_sshrcd/dotdeploy.sh" ]; then
+    alias dotdeploy="sh $_sshrcd/dotdeploy.sh"
+    echo "sshrc: deploy env by running dotdeploy or 'sh $_sshrcd/dotdeploy.sh'"
+fi
+
 unset _sshrcd
 # vim: ft=sh et ts=4 sw=4
