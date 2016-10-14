@@ -7,7 +7,7 @@ if [ -f "$_bashrc" ]; then
 fi
 unset _bashrc
 
-mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle $HOME/.vim/colors
+mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle $HOME/.vim/colors $HOME/.vim/plugin
 if [ -f "$_sshrcd/pathogen.vim" ]; then
     cp "$_sshrcd/pathogen.vim" $HOME/.vim/autoload
     for colo in desert.vim desert256.vim; do
@@ -15,6 +15,7 @@ if [ -f "$_sshrcd/pathogen.vim" ]; then
             cp "$_sshrcd/$colo" $HOME/.vim/colors
         fi
     done
+    cp $_sshrcd/bufferlist.vim $HOME/.vim/plugin
     export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/.vimrc' | source \$MYVIMRC"
 fi
 
@@ -39,7 +40,8 @@ done
 
 if [ -e "$_sshrcd/dotdeploy.sh" ]; then
     alias dotdeploy="sh $_sshrcd/dotdeploy.sh"
-    echo "sshrc: deploy env by running dotdeploy or 'sh $_sshrcd/dotdeploy.sh'"
+    echo "sshrc: deploy env by running dotdeploy [mode] or 'sh $_sshrcd/dotdeploy.sh [mode]'"
+    echo "sshrc: Use the mode 'help' for more information"
 fi
 
 unset _sshrcd
