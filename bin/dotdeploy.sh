@@ -1,6 +1,56 @@
 #!/bin/sh
 # vim: et sw=4 ts=4
 
+mode=$1
+
+usage() {
+    _exit=${1:-0}
+    cat << EOF
+Usage: $0 [help|local|bare|minivim|full]
+
+Install dotfiles either from sshrc's local directrory, or from the net using git.
+
+ help     help
+ local    Install only the dotfiles brought with sshrc.
+ bare     install ony the dotfiles and the minimal vim. don't install bash-it or
+          the vim submodules
+ minivim  don't install vim submodules
+ full     install the full content of the dotfile git repos, and update
+          vim.vcsh's submodules. Slow!
+
+Modes outside of local need git and vcsh.
+
+EOF
+exit $_exit
+}
+
+case "$mode" in
+    help) usage 0 ;;
+    bare|minivim|local|full);;
+    *) echo "Illegal mode option: $mode"
+        usage 1
+        ;;
+esac
+
+if [ -z "$SSHHOME" ]; then
+    _d=$(dirname $0)
+    case "$_d" in
+        */.sshrc.d*) SSHHOME=$(dirname $_d);;
+    esac
+fi
+
+if [ "$mode" = "local" ]; then
+    if [ -z "$SSHHOME" ]; then
+        echo "FATAL: SSHHOME not set, can't get source directory."
+        exit 1
+    fi
+
+    for dotf in $(find $SSHHOME -name '.*' -type f); do
+        cp $dotf $HOME
+    done
+    exit 0
+fi
+
 if vcsh -h >/dev/null 2>&1; then
     vcsh=vcsh
 else
@@ -57,12 +107,27 @@ if ! grep -q '%include .hgrc-global' $HOME/.hgrc; then
 fi
 
 if [ ! -d "$HOME/.config/vcsh/repo.d/vim.vcsh.git" ]; then
+    echo "Cloning vim.vcsh ..."
     $vcsh clone https://github.com/folti/vim.vcsh.git
 else
+    echo "Updating vim.vcsh ..."
     $vcsh vim.vcsh pull
 fi
 
-$vcsh vim.vcsh submodule update --init
-$vcsh vim.vcsh up-subs
+minimal_vims="vim-pathogen vim-nginx bash-support awk-support perl-support spec Colour-Sampler-Pack vim-desert-warm-256"
+case "$mode" in
+    bare|minivim)
+        for vims in $minimal_vims; do
+            $vcsh vim.vcsh submodule update --init .vim/bundle/$vims
+        done
+        ;;
+    *)
+        $vcsh vim.vcsh submodule update --init
+        $vcsh vim.vcsh up-subs
+        ;;
+esac
 
-git clone -b devel https://github.com/folti/bash-it.git -- .bash_it
+if [ "$mode" != "bare" ]; then
+    echo "Pulling Bash-it"
+    git clone -b devel https://github.com/folti/bash-it.git -- .bash_it
+fi
