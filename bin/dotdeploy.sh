@@ -32,6 +32,8 @@ case "$mode" in
         ;;
 esac
 
+cd $HOME
+
 if [ -z "$SSHHOME" ]; then
     _d=$(dirname $0)
     case "$_d" in
@@ -114,7 +116,7 @@ else
     $vcsh vim.vcsh pull
 fi
 
-minimal_vims="vim-pathogen vim-nginx bash-support awk-support perl-support spec Colour-Sampler-Pack vim-desert-warm-256"
+minimal_vims="bufferlist vim-pathogen vim-nginx bash-support awk-support perl-support spec Colour-Sampler-Pack vim-desert-warm-256"
 case "$mode" in
     bare|minivim)
         for vims in $minimal_vims; do
