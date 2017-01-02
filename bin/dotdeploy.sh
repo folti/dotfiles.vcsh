@@ -124,7 +124,7 @@ case "$mode" in
         done
         ;;
     *)
-        $vcsh vim.vcsh submodule update --init
+        $vcsh vim.vcsh submodule update --init --recursive
         $vcsh vim.vcsh up-subs
         ;;
 esac
@@ -132,4 +132,10 @@ esac
 if [ "$mode" != "bare" ]; then
     echo "Pulling Bash-it"
     git clone -b devel https://github.com/folti/bash-it.git -- .bash_it
+fi
+
+if [ "$mode" = "full" ]; then
+    if [ -f /etc/debian_version ]; then
+        sudo apt-get install -y cmake exuberant-ctags g++ python-dev
+    fi
 fi
