@@ -217,6 +217,29 @@ unset __screen
 #export win bbug heirloom heirman gensnapshot listdlls
 export gensnapshot listdlls
 
+set_screen_title(){
+    _title=$1
+
+    case "$TERM" in
+        screen*) printf '\033k%s\033\\' "$_title" ;;
+    esac
+}
+
+get_xres() {
+    s=$(xdpyinfo | grep dimensions | awk '{print $2}' | awk -Fx '{print $1, $2}')
+    read X11_X X11_Y <<<"$s"
+}
+
+get_rdesktop_res() {
+    get_xres
+    if [ $X11_X -le 1600 ]; then
+        RES='90%'
+    else
+        RES='1600x900'
+    fi
+    echo $RES
+    unset X11_X X11_Y
+}
 
 alias xtitle='echo -ne "\033]0;$1\007"'
 alias hsearch='history | grep '
