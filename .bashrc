@@ -268,6 +268,21 @@ if [ -f $HOME/.LESS_TERMCAP ]; then
     source $HOME/.LESS_TERMCAP
 fi
 
+# very long bash history
+HISTSIZE=10000
+HISTFILESIZE=10000
+export HISTSIZE HISTFILESIZE
+# allow varoius bash instances to append their history to the histfile.
+shopt -s histappend
+# don't put duplicate lines in the history. See bash(1) for more options
+#export HISTCONTROL=ignoredups
+case "$HISTCONTROL" in
+    *ignoreboth*);;
+    *)
+        export HISTCONTROL="$HISTCONTROL:ignoreboth"
+        ;;
+esac
+
 # load bash-it
 if [ -f $HOME/.bash_it_rc ]; then
     source $HOME/.bash_it_rc
@@ -287,21 +302,6 @@ function git_clean_untracked () {
     done
     IFS=$ofs
 }
-
-# very long bash history
-HISTSIZE=10000
-HISTFILESIZE=10000
-export HISTSIZE HISTFILESIZE
-# allow varoius bash instances to append their history to the histfile.
-shopt -s histappend
-# don't put duplicate lines in the history. See bash(1) for more options
-#export HISTCONTROL=ignoredups
-case "$HISTCONTROL" in
-    *ignoreboth*);;
-    *)
-        export HISTCONTROL="$HISTCONTROL:ignoreboth"
-        ;;
-esac
 
 #cuz we are lazy
 shopt -s autocd
