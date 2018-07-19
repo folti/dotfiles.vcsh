@@ -7,8 +7,7 @@ fc-cache -fv $HOME/.fonts
 mkfontdir $HOME/.fonts
 (cd $HOME && xrdb -merge $HOME/.Xresources)
 xset +fp $HOME/.fonts
-xhost inet:hapci
-setxkbmap -option "grp:shift_toggle,grp_led:scroll" us,hu basic,querty
+#setxkbmap -option "grp:shift_toggle,grp_led:scroll" us,hu basic,querty
 
 case `hostname` in
     foltpad*)
