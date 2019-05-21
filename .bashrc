@@ -269,8 +269,8 @@ if [ -f $HOME/.LESS_TERMCAP ]; then
 fi
 
 # very long bash history
-HISTSIZE=10000
-HISTFILESIZE=10000
+HISTSIZE=20000
+HISTFILESIZE=20000
 export HISTSIZE HISTFILESIZE
 # allow varoius bash instances to append their history to the histfile.
 shopt -s histappend
