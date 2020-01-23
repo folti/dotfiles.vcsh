@@ -1,0 +1,53 @@
+#!/bin/sh
+
+RCFILE="$HOME/.keepassxcrc"
+KPBIN=
+KEEPATH=
+
+fatal() {
+    echo "FATAL: $*"
+    exit 1
+}
+
+if [ -f "$RCFILE" ]; then
+    . "$RCFILE"
+else
+    fatal "$RCFILE not found."
+fi
+
+if [ -z "$KPBIN" ]; then
+    fatal "KPBIN variable is empty. Set it in $RCFILE"
+fi
+
+if [ -z "$KEEPATH" ]; then
+    fatal "KEEPATH variable is empty. Set it in $RCFILE"
+fi
+
+if [ -f "$KEEPATH/$KPBIN" ]; then
+    _KPBIN="$KEEPATH/$KPBIN"
+fi
+
+if [ -z "$_KPBIN" ]; then
+    echo "FATAL: Unable to find KeePassXC binary."
+    echo "Paths checked: $KEEPATH"
+    exit 1
+fi
+
+if [ ! -x "$_KPBIN" ]; then
+    chmod +x "$_KPBIN"
+fi
+
+set_screen_title(){
+    _title=$1
+
+    case "$TERM" in
+        screen*) printf '\033k%s\033\\' "$_title" ;;
+    esac
+}
+
+set_screen_title "KeePassXC"
+echo "Running: $_KPBIN $@"
+"$_KPBIN" $@
+set_screen_title "$(basename $SHELL):KeePassXC"
+
+# vim: et sw=4 ts=4 ft=sh
