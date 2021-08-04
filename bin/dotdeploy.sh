@@ -139,6 +139,6 @@ fi
 
 if [ "$mode" = "full" ]; then
     if [ -f /etc/debian_version ]; then
-        sudo apt-get install -y cmake exuberant-ctags g++ python-dev spellcheck
+        sudo apt-get install -y cmake exuberant-ctags g++ python-dev shellcheck
     fi
 fi
